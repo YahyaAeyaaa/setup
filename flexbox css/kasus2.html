@@ -1,0 +1,79 @@
+<!-- normal-flex.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Normal Flex - Simple Navbar</title>
+  <!-- Link ke CSS-mu nanti -->
+   <style>
+    body{
+        margin: 0px;
+        background-color: azure;
+        height: 100vh;
+    }
+
+ .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  position: sticky;
+  top: 0; /* ← Ini yang kamu lupa */
+  border: 2px solid black;
+  margin: 0;
+  border-radius: 5px;
+  background-color: azure; /* Ini penting juga biar ga transparan pas sticky */
+}
+
+
+    .logo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px;
+    }
+
+    .nav-menu{
+  display: flex;
+  gap: 20px; /* Tambahin ini buat kasih jarak antar menu */
+  list-style-type: none;
+  justify-content: center; /* atau space-around / space-between */
+  align-items: center;
+  margin: 0;
+  padding: 0;
+    }
+
+    .a{
+        text-decoration: none;
+        color: #a0a0a0;
+    }
+
+    .a:hover{
+        color: black;
+        transition: 0.3s;
+    }
+
+    .footer{
+        margin: 10px;
+        border: 2px solid red;
+        padding: 10px;
+        height: 1000vh;
+    }
+   </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">YahyaKu.dev</div>
+    <ul class="nav-menu">
+      <li class="box"><a href="#" class="a">Home</a></li>
+      <li class="box"><a href="#" class="a">Projects</a></li>
+      <li class="box"><a href="#" class="a">Contact</a></li>
+    </ul>
+    </div>
+  </nav>
+
+  <div class="footer">
+    <p class="Hello1">Hallo</p>
+    </div>
+</body>
+</html>

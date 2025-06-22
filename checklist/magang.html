@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist Aturan Magang</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 30px 25px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-container {
+            padding: 30px 25px;
+        }
+
+        .overall-progress {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .overall-progress h2 {
+            color: #8b4513;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .overall-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #8b4513;
+        }
+
+        .stat-label {
+            color: #8b4513;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.8s ease;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        .category {
+            margin-bottom: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-header {
+            padding: 20px 25px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-1 .category-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .category-2 .category-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .category-3 .category-header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .category-progress {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .category-content {
+            background: white;
+            padding: 20px 25px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px 18px;
+            margin-bottom: 12px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #e9ecef;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .checklist-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-left-color: #4facfe;
+        }
+
+        .checklist-item.completed {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-left-color: #28a745;
+            animation: completed 0.5s ease-out;
+        }
+
+        @keyframes completed {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .checklist-item.completed .checklist-text {
+            text-decoration: line-through;
+            color: #6c757d;
+        }
+
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            margin-right: 15px;
+            margin-top: 2px;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .checkbox input {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 22px;
+            width: 22px;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox:hover .checkmark {
+            border-color: #4facfe;
+            background: #f8f9ff;
+        }
+
+        .checkbox input:checked ~ .checkmark {
+            background: #28a745;
+            border-color: #28a745;
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .checkbox input:checked ~ .checkmark:after {
+            display: block;
+            animation: checkmark 0.3s ease-out;
+        }
+
+        @keyframes checkmark {
+            0% {
+                opacity: 0;
+                transform: rotate(45deg) scale(0);
+            }
+            100% {
+                opacity: 1;
+                transform: rotate(45deg) scale(1);
+            }
+        }
+
+        .checklist-text {
+            flex: 1;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #343a40;
+            transition: all 0.3s ease;
+        }
+
+        .clear-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .clear-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .clear-button:active {
+            transform: translateY(0);
+        }
+
+        .celebration {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            animation: celebrate 1s ease-out forwards;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @keyframes celebrate {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.2) rotate(180deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1) rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.7rem;
+            }
+            
+            .main-container {
+                padding: 20px 20px;
+            }
+            
+            .checklist-item {
+                padding: 12px 15px;
+            }
+
+            .overall-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Checklist Aturan Magang</h1>
+            <p>Pastikan semua aturan sudah diikuti dengan baik</p>
+        </div>
+        
+        <div class="main-container">
+            <div class="overall-progress">
+                <h2>📊 Progress Keseluruhan</h2>
+                <div class="overall-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="total-completed">0</div>
+                        <div class="stat-label">Selesai</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="total-items">22</div>
+                        <div class="stat-label">Total Item</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="completion-percentage">0%</div>
+                        <div class="stat-label">Penyelesaian</div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="overall-progress-fill"></div>
+                </div>
+            </div>
+
+            <!-- Kategori 1: Aturan Absensi -->
+            <div class="category category-1">
+                <div class="category-header">
+                    <span>⏰ Aturan Absensi & Waktu</span>
+                    <span class="category-progress" id="cat1-progress">0/6</span>
+                </div>
+                <div class="category-content">
+                    <div class="checklist-item" data-category="1">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Datang sebelum <strong>08.00 WIB</strong> setiap hari
+                        </div>
+                    </div>
+
+                    <div class="checklist-item" data-category="1">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Gunakan <strong>Magangku App</strong> untuk selfie absensi
+                        </div>
+                    </div>
+
+                    <div class="checklist-item" data-category="1">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Lakukan absen istirahat (mulai & kembali) sesuai waktu
+                        </div>
+                    </div>
+
+                    <div class="checklist-item" data-category="1">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Absen pulang setelah <strong>16.00 WIB</strong>
+                        </div>
+                    </div>
+
+                    <div class="checklist-item" data-category="1">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Jumat: istirahat dari <strong>11.00–13.00 WIB</strong>
+                        </div>
+                    </div>
+
+                    <div class="checklist-item" data-category="1">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Izin ke ketua/pimpinan/HRD jika tidak bisa hadir
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kategori 2: Aturan Perilaku & Penampilan -->
+            <div class="category category-2">
+                <div class="category-header">
+                    <span>👔 Aturan Perilaku & Penampilan</span>
+                    <span class="category-progress" id="cat2-progress">0/10</span>
+                </div>
+                <div class="category-content">
+                    <div class="checklist-item" data-category="2">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Bersikap <strong>sopan, jujur, dan bertanggung jawab</strong>
+                        </div>
+                    </div>
+
+                    <div class="checklist-item" data-category="2">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Tidak tidur/main game/santai saat jam kantor
+                        </div>
+                    </div>
+
+                    <div class="checklist-item" data-category="2">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Tidak membahas topik dewasa
+                        </div>
+                    </div>
+
+                    <div class="checklist-item" data-category="2">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Menjaga kebersihan, buang sampah setelah makan
+                        </div>
+                    </div>
+
+                    <div class="checklist-item" data-category="2">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Wajib <strong>pakai ID card</strong> dari pagi sampai pulang
+                        </div>
+                    </div>
+
+                    <div class="checklist-item" data-category="2">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Tidak pakai jaket/sweater di dalam kantor (kecuali izin)
+                        </div>
+                    </div>
+
+                    <div class="checklist-item" data-category="2">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Berpakaian <strong>rapi & sopan</strong>, tidak ketat/transparan
+                        </div>
+                    </div>
+
+                    <div class="checklist-item" data-category="2">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Sosialisasi dengan siswa sekolah lain
+                        </div>
+                    </div>
+
+                    <div class="checklist-item" data-category="2">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Tidak berduaan dengan lawan jenis di tempat sepi
+                        </div>
+                    </div>
+
+                    <div class="checklist-item" data-category="2">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Wajib mematikan lampu & menutup pintu toilet/musholla
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kategori 3: Aturan Administratif & Pelanggaran -->
+            <div class="category category-3">
+                <div class="category-header">
+                    <span>📝 Aturan Administratif & Pelanggaran</span>
+                    <span class="category-progress" id="cat3-progress">0/6</span>
+                </div>
+                <div class="category-content">
+                    <div class="checklist-item" data-category="3">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Tanda tangan jurnal setiap <strong>minggu (Jumat)</strong>
+                        </div>
+                    </div>
+
+                    <div class="checklist-item" data-category="3">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Tidak menunda/melupakan pengisian jurnal
+                        </div>
+                    </div>
+
+                    <div class="checklist-item" data-category="3">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Pahami bahwa telat >5x = <strong>SP1</strong>
+                        </div>
+                    </div>
+
+                    <div class="checklist-item" data-category="3">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Hindari pelanggaran yang bisa <strong>dilaporkan oleh teman</strong>
+                        </div>
+                    </div>
+
+                    <div class="checklist-item" data-category="3">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Waspadai sistem "cepu" – selalu jaga etika di jam kerja
+                        </div>
+                    </div>
+
+                    <div class="checklist-item" data-category="3">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="checklist-text">
+                            Jika melaporkan 5 pelanggaran valid, bisa hapus SP
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="clear-button" id="clearButton">
+                🗑️ Hapus Semua Checklist
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+        let clearButton = document.getElementById('clearButton');
+        
+        // Elements for overall progress
+        let totalCompleted = document.getElementById('total-completed');
+        let totalItems = document.getElementById('total-items');
+        let completionPercentage = document.getElementById('completion-percentage');
+        let overallProgressFill = document.getElementById('overall-progress-fill');
+        
+        // Elements for category progress
+        let cat1Progress = document.getElementById('cat1-progress');
+        let cat2Progress = document.getElementById('cat2-progress');
+        let cat3Progress = document.getElementById('cat3-progress');
+
+        // Update progress for all categories and overall
+        function updateProgress() {
+            let totalChecked = 0;
+            let totalItemsCount = checkboxes.length;
+
+            // Count for each category
+            let cat1Checked = 0, cat1Total = 0;
+            let cat2Checked = 0, cat2Total = 0;
+            let cat3Checked = 0, cat3Total = 0;
+
+            checkboxes.forEach(checkbox => {
+                let category = checkbox.closest('.checklist-item').dataset.category;
+                
+                if (category === '1') {
+                    cat1Total++;
+                    if (checkbox.checked) cat1Checked++;
+                } else if (category === '2') {
+                    cat2Total++;
+                    if (checkbox.checked) cat2Checked++;
+                } else if (category === '3') {
+                    cat3Total++;
+                    if (checkbox.checked) cat3Checked++;
+                }
+
+                if (checkbox.checked) {
+                    totalChecked++;
+                }
+            });
+
+            // Update overall progress
+            let percentage = Math.round((totalChecked / totalItemsCount) * 100);
+            totalCompleted.textContent = totalChecked;
+            totalItems.textContent = totalItemsCount;
+            completionPercentage.textContent = percentage + '%';
+            overallProgressFill.style.width = percentage + '%';
+
+            // Update category progress
+            cat1Progress.textContent = `${cat1Checked}/${cat1Total}`;
+            cat2Progress.textContent = `${cat2Checked}/${cat2Total}`;
+            cat3Progress.textContent = `${cat3Checked}/${cat3Total}`;
+
+            // Show celebration when all completed
+            if (totalChecked === totalItemsCount && totalItemsCount > 0) {
+                showCelebration();
+            }
+        }
+
+        // Add event listeners to checkboxes
+        checkboxes.forEach((checkbox, index) => {
+            checkbox.addEventListener('change', function() {
+                let item = this.closest('.checklist-item');
+                
+                if (this.checked) {
+                    item.classList.add('completed');
+                } else {
+                    item.classList.remove('completed');
+                }
+                
+                updateProgress();
+            });
+        });
+
+        // Clear all checkboxes
+        clearButton.addEventListener('click', function() {
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+                let item = checkbox.closest('.checklist-item');
+                item.classList.remove('completed');
+            });
+            updateProgress();
+            
+            // Add button animation feedback
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+        });
+
+        // Show celebration effect
+        function showCelebration() {
+            let celebration = document.createElement('div');
+            celebration.className = 'celebration';
+            celebration.textContent = '🎉';
+            document.body.appendChild(celebration);
+            
+            setTimeout(() => {
+                document.body.removeChild(celebration);
+            }, 1000);
+        }
+
+        // Add click effect to checklist items
+        document.querySelectorAll('.checklist-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                if (e.target.type !== 'checkbox') {
+                    let checkbox = this.querySelector('input[type="checkbox"]');
+                    checkbox.click();
+                }
+            });
+        });
+
+        // Initialize progress on page load
+        updateProgress();
+    </script>
+</body>
+</html>

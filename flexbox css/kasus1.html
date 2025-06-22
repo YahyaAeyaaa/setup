@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Easy Flex - Center Card</title>
+  <style>
+    /* ini target utamanya: body jadi flex-container */
+    body {
+    border: 2px solid crimson;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* full tinggi layar */
+      margin: 0px; /* hilangkan margin default browser */
+    }
+
+    .card {
+      border: 2px solid salmon;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Halo, Dunia!</h2>
+    <p>Kartu ini harus selalu di tengah layar.</p>
+    <button>Click Me</button>
+  </div>
+</body>
+</html>

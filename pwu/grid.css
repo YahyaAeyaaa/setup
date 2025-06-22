@@ -1,0 +1,197 @@
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Comfortaa', sans-serif;
+            color: white;
+        }
+
+        .container1 {
+            overflow: hidden;
+            margin: 10px;
+            padding: 5px;
+            text-align: center;
+            border: 2px solid black;
+            display: grid;
+            grid-template-areas: 
+                "header header"
+                "aside main"
+                "nav main"
+                "footer footer";
+            grid-template-columns: 1fr 1.5fr;
+            grid-template-rows: 1fr 1fr 1.3fr;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            grid-area: header;
+            background-color: purple;
+            text-align: center;
+            padding: 20px;
+        }
+
+        aside {
+            grid-area: aside;
+            background-color: blue;
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav {
+            grid-area: nav;
+            background-color: indianred;
+            padding: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        main {
+            grid-area: main;
+            background-color: orange;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        footer {
+            grid-area: footer;
+            background-color: #a0a0a0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Media Queries untuk Responsiveness */
+
+        /* Tablet - ukuran sedang (768px - 1024px) */
+        @media screen and (max-width: 1024px) {
+            .container1 {
+                margin: 8px;
+                padding: 4px;
+            }
+            
+            header {
+                padding: 15px;
+                font-size: 18px;
+            }
+            
+            aside {
+                padding: 30px;
+            }
+            
+            nav {
+                padding: 50px;
+            }
+            
+            main {
+                padding: 15px;
+            }
+        }
+
+        /* Tablet kecil dan HP landscape (481px - 768px) */
+        @media screen and (max-width: 768px) {
+            .container1 {
+                grid-template-areas: 
+                    "header header"
+                    "aside nav"
+                    "main main"
+                    "footer footer";
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto 2fr auto;
+                margin: 5px;
+                padding: 3px;
+            }
+            
+            header {
+                padding: 12px;
+                font-size: 16px;
+            }
+            
+            aside, nav {
+                padding: 20px;
+                font-size: 14px;
+            }
+            
+            main {
+                padding: 20px;
+                font-size: 14px;
+            }
+            
+            footer {
+                padding: 8px;
+                font-size: 12px;
+            }
+        }
+
+        /* Mobile - HP portrait (max 480px) */
+        @media screen and (max-width: 480px) {
+            .container1 {
+                grid-template-areas: 
+                    "header"
+                    "nav"
+                    "aside"
+                    "main"
+                    "footer";
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto 2fr auto;
+                margin: 2px;
+                padding: 2px;
+            }
+            
+            header {
+                padding: 10px;
+                font-size: 14px;
+            }
+            
+            aside, nav {
+                padding: 15px;
+                font-size: 12px;
+            }
+            
+            main {
+                padding: 15px;
+                font-size: 12px;
+                min-height: 200px;
+            }
+            
+            footer {
+                padding: 6px;
+                font-size: 10px;
+            }
+        }
+
+        /* Mobile sangat kecil (max 320px) */
+        @media screen and (max-width: 320px) {
+            .container1 {
+                margin: 1px;
+                padding: 1px;
+            }
+            
+            header {
+                padding: 8px;
+                font-size: 12px;
+            }
+            
+            aside, nav {
+                padding: 10px;
+                font-size: 11px;
+            }
+            
+            main {
+                padding: 10px;
+                font-size: 11px;
+            }
+            
+            footer {
+                padding: 5px;
+                font-size: 9px;
+            }
+        }

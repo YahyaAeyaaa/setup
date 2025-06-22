@@ -1,0 +1,100 @@
+<!-- hard-flex.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hard Flex - Responsive Gallery</title>
+  <!-- CSS link nanti kamu isi -->
+   <style>
+        body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #aeaeae 0%, #252525 100%);
+      min-height: 100vh;
+      padding: 20px;
+      margin: 0px;
+    }
+
+    .gallery-container{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 15px;
+    }
+
+    .gallery-item{
+        border: 2px solid white;
+        background: linear-gradient(45deg , #c5c5c5 , #5e5e5e);
+        flex-wrap: wrap;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3rem;
+        font-weight: bold;
+        color: white;
+        min-height: 200px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .gallery-item:nth-child(1) { background: linear-gradient(45deg, #c5c5c5 , #5e5e5e); }
+    .gallery-item:nth-child(2) { background: linear-gradient(45deg, #868686, #262a26); }
+    .gallery-item:nth-child(3) { background: linear-gradient(45deg, #000000, #ffffff); }
+    .gallery-item:nth-child(4) { background: linear-gradient(45deg, #e2e1e1, #800000); }
+    .gallery-item:nth-child(5) { background: linear-gradient(45deg, #000000, #2033b2); }
+    .gallery-item:nth-child(6) { background: linear-gradient(45deg, #929292, #096106); }
+
+
+
+    @media (min-width: 768px) {
+      .gallery-item {
+        flex: 0 0 calc(33.33% - 20px);
+        max-width: calc(33.33% - 20px);
+      }
+    }
+
+
+        @media (max-width: 767px) and (min-width: 480px) {
+      .gallery-item {
+        flex: 0 0 calc(50% - 15px);
+        max-width: calc(50% - 15px);
+      }
+            .gallery-container {
+        gap: 15px;
+      }
+    }
+
+        @media (max-width: 479px) {
+      .gallery-item {
+        flex: 0 0 100%;
+        max-width: 100%;
+        min-height: 150px;
+        font-size: 2.5rem;
+      }
+      
+      .gallery-container {
+        gap: 15px;
+        padding: 15px;
+      }
+      
+      body {
+        padding: 10px;
+      }
+    }
+   </style>
+</head>
+<body>
+  <section class="gallery-container">
+    <div class="gallery-item">1</div>
+    <div class="gallery-item">2</div>
+    <div class="gallery-item">3</div>
+    <div class="gallery-item">4</div>
+    <div class="gallery-item">5</div>
+    <div class="gallery-item">6</div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hard Flex - Responsive Gallery</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .gallery-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: stretch;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .gallery-item {
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 3rem;
+      font-weight: bold;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      min-height: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .gallery-item:hover::before {
+      transform: translateX(100%);
+    }
+
+    .gallery-item:nth-child(1) { background: linear-gradient(45deg, #ff6b6b, #ff8e8e); }
+    .gallery-item:nth-child(2) { background: linear-gradient(45deg, #4ecdc4, #7fddda); }
+    .gallery-item:nth-child(3) { background: linear-gradient(45deg, #45b7d1, #74c9e8); }
+    .gallery-item:nth-child(4) { background: linear-gradient(45deg, #f7b801, #f9ca24); }
+    .gallery-item:nth-child(5) { background: linear-gradient(45deg, #a55eea, #c679f0); }
+    .gallery-item:nth-child(6) { background: linear-gradient(45deg, #26de81, #5ae889); }
+
+    /* Desktop - 3 columns */
+    @media (min-width: 768px) {
+      .gallery-item {
+        flex: 0 0 calc(33.33% - 20px);
+        max-width: calc(33.33% - 20px);
+      }
+    }
+
+    /* Tablet - 2 columns */
+    @media (max-width: 767px) and (min-width: 480px) {
+      .gallery-item {
+        flex: 0 0 calc(50% - 15px);
+        max-width: calc(50% - 15px);
+      }
+      
+      .gallery-container {
+        gap: 15px;
+      }
+    }
+
+    /* Mobile - 1 column */
+    @media (max-width: 479px) {
+      .gallery-item {
+        flex: 0 0 100%;
+        max-width: 100%;
+        min-height: 150px;
+        font-size: 2.5rem;
+      }
+      
+      .gallery-container {
+        gap: 15px;
+        padding: 15px;
+      }
+      
+      body {
+        padding: 10px;
+      }
+    }
+
+    /* Add a subtle animation on load */
+    .gallery-item {
+      animation: slideInUp 0.6s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+    .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+    .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+    .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+    .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+    .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+
+    @keyframes slideInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="gallery-container">
+    <div class="gallery-item">1</div>
+    <div class="gallery-item">2</div>
+    <div class="gallery-item">3</div>
+    <div class="gallery-item">4</div>
+    <div class="gallery-item">5</div>
+    <div class="gallery-item">6</div>
+  </section>
+</body>
+</html>

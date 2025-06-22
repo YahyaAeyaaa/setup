@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+/* grid colum */
+
+        html , body {
+            margin: 0;
+            padding: 0;
+            width: 100vh;
+        }
+
+        .container{
+            width: 700px;
+            margin: 50px auto;
+            display: grid;
+            grid-template-columns: 300px 200px auto;
+            grid-template-rows: 100px 150px 300px 100px auto;
+        }
+
+        .container1{
+            width: 800px;
+            margin: 50px auto;
+            display: grid;
+            /* grid-template-columns: 1fr 2fr 3fr; cara satu satu*/
+            grid-template-columns: repeat(2 , 3fr) repeat(4 , 2fr);
+            /* grid-template-rows: 3fr 2.5fr 2fr 1.5fr; cara satu satu*/
+            grid-template-rows: repeat(1 , 3fr);
+        }
+
+        .item{
+            background-color: rgb(4, 113, 255);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .item:nth-child(even) {
+            background-color: rgb(163, 117, 255);
+        }
+
+        .container2{
+            width: 800px;
+            margin: 50px auto;
+            display: grid;
+            grid-template-columns: 1fr max-content 1fr;
+        }
+
+        .container3{
+            border: 5px solid rgb(0, 0, 0);
+            width: 900px;
+            margin: 60px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill , 220px);
+        }
+
+        img{
+            display: block;
+            width: 100%;
+        }
+
+        .Gallery{
+            width: 80%;
+            margin: auto;
+            border: 10px solid black;
+        }
+        /* colum selesai */
+
+        /* grid fr */
+
+        /* areas */
+
+        .container4{
+            width: 80%;
+            border: 5px solid #a0a0a0;
+            margin: 50px;
+            display: grid;
+            grid-template-areas: 
+            "header header header"
+            "sidebar main main"
+            "sidebar main main"
+            "footer footer footer";
+        }
+
+        .header{
+            background-color: rgb(130, 182, 227);
+            grid-area: header;
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .sidebar{
+            background-color: crimson;
+            grid-area: sidebar;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main{
+            display: flex;
+            justify-content: center;
+            background-color: rgb(0, 37, 106);
+            grid-area: main;
+        }
+
+        .footer{
+            display: flex;
+            justify-content: center;
+            background-color: aqua;
+            grid-area: footer;
+        }
+
+        .container5{
+            margin: 20px;
+            width: 800px;
+            display: grid;
+            grid-template: 100px 200px / 1fr 1fr 2fr;
+            gap: 20px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+        <div class="item">7</div>
+        <div class="item">8</div>
+        <div class="item">9</div>
+        <div class="item">10</div>
+        <div class="item">11</div>
+        <div class="item">12</div>
+        <div class="item">13</div>
+    </div>
+
+        <div class="container1">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+        <div class="item">7</div>
+        <div class="item">8</div>
+        <div class="item">9</div>
+        <div class="item">10</div>
+        <div class="item">11</div>
+        <div class="item">12</div>
+    </div>
+    <!-- special keywork -->
+
+    <!-- 1. Min & Max content -->
+    <div class="container2">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">Yahya Suka Kila Fr fr Fr Fr Fr fr Fr sukaaaaaa</div>
+        <div class="item">6</div>
+        <div class="item">7</div>
+        <div class="item">8</div>
+        <div class="item">9</div>
+    </div>
+    <!-- min max selesai -->
+
+    <!-- fill & fit -->
+
+    <div class="container3">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+    </div>
+
+    <!-- fill & fit selesai -->
+
+
+    <!-- template areas -->
+
+    <div class="container4">
+        <div class="header">1</div>
+        <div class="sidebar">2</div>
+        <div class="main">3</div>
+        <div class="footer">4</div>
+    </div>
+
+    <!-- grid shorthand -->
+
+    <div class="container5">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+    </div>
+
+    <!-- shorthand selesai -->
+
+    <!-- areas selesai -->
+
+</body>
+</html>
